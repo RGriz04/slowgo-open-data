@@ -1,0 +1,24 @@
+{
+ "file": "fl.golfcart-overrides.json",
+ "what": "Hand-tags for path_closure.py (fix 2): paths we treat as cart-legal although OSM does not tag them golf_cart. An active entry writes golf_cart=<value> into OUR extract only, stamped slowgo:golf_cart_override=<id> with the prior value kept in slowgo:golf_cart_orig, never an OSM upload. Read path_closure.py's OVERRIDES section and docs/memos/path-closure-fix2-plan.md before adding one.",
+ "active_rows": 1,
+ "inactive_rows_omitted": 0,
+ "rows": [
+  {
+   "id": "FL-VILLAGES-354380295",
+   "active": true,
+   "way_id": 354380295,
+   "golf_cart": "designated",
+   "expected_highway": "path",
+   "expected_length_m": 569,
+   "where": "The Villages: from Glen Hollow Way (28.93459, -81.99593) to the private service roads off 72nd Boulevard (28.93641, -81.99233)",
+   "ruled_on": "2026-10-06",
+   "reason": "The only open link into a pocket of ~300 address points (72nd Boulevard and 24 private service roads). Fix 2 would close it, because it carries no tags at all, and seal the pocket. Found by the sealed-pocket check on the 2026-10-06 box session (docs/memos/path-closure-fix2-plan.md section 12).",
+   "register_sources": [
+    "slowgo_first_party"
+   ],
+   "quarantined_sources": [],
+   "in_live_map": true
+  }
+ ]
+}

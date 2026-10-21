@@ -1,0 +1,34 @@
+{
+ "state": "ga",
+ "mode": "stamps",
+ "inputs": {
+  "stock": {
+   "file": "georgia-260831.osm.pbf (Geofabrik 2026-08-31, stock)",
+   "sha256": "5117cfe6e557cd4d8ad3bb8fc48e81b89ba676e41d29cb4f6d9e343e3bd04c54"
+  },
+  "final": {
+   "file": "georgia-260831.osm.pbf",
+   "bytes": 355801003,
+   "sha256": "d3cb77d8b94d526e46af46338e0ab9cae6d333bd99b313c05be7e9404f9cf2d2"
+  }
+ },
+ "objects_changed": 200547,
+ "by_change": {
+  "modified": 200547,
+  "added": 0,
+  "deleted": 0
+ },
+ "geometry_changes": 0,
+ "speed_rows": 0,
+ "changed_keys": {
+  "bicycle": 200533,
+  "slowgo:path_closed": 200533,
+  "slowgo:bicycle_orig": 9443,
+  "slowgo:short_link_open": 14
+ },
+ "speed_rows_reviewed_with": {},
+ "element_counts": null,
+ "built_utc": "2026-10-16T17:04:35Z",
+ "street_view_derived_rows": 0,
+ "osm_import_never_rows": 0
+}

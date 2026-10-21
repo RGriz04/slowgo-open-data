@@ -1,0 +1,68 @@
+{
+ "state": "ny",
+ "mode": "diff",
+ "inputs": {
+  "stock": {
+   "file": "new-york-latest.osm.pbf",
+   "bytes": 495447873,
+   "sha256": "83d52238d02459511a414b5b937df2add92ff987e677fd61a412b1288cd0c8db"
+  },
+  "final": {
+   "file": "new-york-enriched-v3.osm.pbf",
+   "bytes": 496335297,
+   "sha256": "5a4c071eb14d2df0e3b5364992aa324eef0c0716c295cac9cecbcaa47830ab4a"
+  }
+ },
+ "objects_changed": 668636,
+ "by_change": {
+  "modified": 668636,
+  "added": 0,
+  "deleted": 0
+ },
+ "geometry_changes": 0,
+ "speed_rows": 51574,
+ "changed_keys": {
+  "bicycle": 617056,
+  "slowgo:path_closed": 617056,
+  "maxspeed": 51574,
+  "maxspeed:source": 51574,
+  "slowgo:maxspeed_action": 51574,
+  "slowgo:nysdot_routeid": 50750,
+  "slowgo:bicycle_orig": 16009,
+  "slowgo:reviewed": 8204,
+  "slowgo:maxspeed_osm_orig": 1312,
+  "slowgo:maxspeed_station": 824,
+  "slowgo:maxspeed_sentinel": 242,
+  "slowgo:maxspeed_true": 242,
+  "slowgo:corroborated": 158,
+  "slowgo:short_link_open": 6
+ },
+ "speed_rows_reviewed_with": {
+  "nysdot": 8204
+ },
+ "element_counts": {
+  "stock": {
+   "n": 56613625,
+   "w": 7274060,
+   "r": 77005
+  },
+  "final": {
+   "n": 56613625,
+   "w": 7274060,
+   "r": 77005
+  }
+ },
+ "built_utc": "2026-10-16T17:41:40Z",
+ "street_view_derived_rows": 0,
+ "osm_import_never_rows": 0,
+ "relabelled": [
+  {
+   "key": "slowgo:reviewed",
+   "from": "street-view",
+   "to": "nysdot",
+   "rows": 8204,
+   "why": "Wrong label: these are New York State DOT Roadway Inventory values; no imagery was used (SlowGo ruling 2026-10-20). Values unchanged; our next map build carries the same label.",
+   "relabelled_utc": "2026-10-21T21:59:15Z"
+  }
+ ]
+}

@@ -1,0 +1,34 @@
+{
+ "file": "fl.crossings.json",
+ "what": "Allowlisted signalised crossings whose short approach streets keep bicycle access in our extract (crossing carve-out).",
+ "rows": [
+  {
+   "id": "FL-466A-PINELLAS",
+   "sources": [
+    "First-party field report (2026-09-01): a rider crosses here at grade at this signal.",
+    "FS 316.2122: a low-speed vehicle may cross a road posted over 35 mph at an intersection."
+   ],
+   "register_sources": [
+    "first_party_field_report",
+    "fl_statutes"
+   ],
+   "quarantined_sources": [],
+   "signal_nodes": [
+    2405675606,
+    2405675605
+   ],
+   "crossed_ways": [
+    740153473,
+    261474936
+   ],
+   "approach_ways": [
+    859064197,
+    360639411,
+    360639413
+   ],
+   "crossed_max_mph": 45,
+   "status": "verified",
+   "in_live_map": true
+  }
+ ]
+}

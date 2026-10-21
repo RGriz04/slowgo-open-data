@@ -1,0 +1,78 @@
+{
+ "state": "fl",
+ "mode": "diff",
+ "inputs": {
+  "stock": {
+   "file": "florida-260831.osm.pbf",
+   "bytes": 655569595,
+   "sha256": "edb9e3f4b84ea9419b0bcaa1f52e207b5aa26b79fc58b1045148395e0eec5cf0"
+  },
+  "final": {
+   "file": "fl-B-closed.osm.pbf",
+   "bytes": 656220545,
+   "sha256": "c23ff16737675b6715dc7aed8f75530b99ef964fa13dd4d0f92a39f41032252b"
+  }
+ },
+ "objects_changed": 740613,
+ "by_change": {
+  "modified": 740613,
+  "added": 0,
+  "deleted": 0
+ },
+ "geometry_changes": 0,
+ "speed_rows": 30869,
+ "changed_keys": {
+  "bicycle": 709720,
+  "slowgo:path_closed": 709717,
+  "maxspeed": 30869,
+  "maxspeed:source": 30865,
+  "slowgo:maxspeed_action": 30865,
+  "slowgo:fdot_roadway": 30272,
+  "slowgo:bicycle_orig": 29486,
+  "slowgo:maxspeed_station": 593,
+  "slowgo:maxspeed_sentinel": 142,
+  "slowgo:maxspeed_true": 142,
+  "slowgo:corroborated": 109,
+  "slowgo:maxspeed_osm_orig": 47,
+  "slowgo:short_link_open": 23,
+  "slowgo:maxspeed_override": 4,
+  "slowgo:maxspeed_source": 4,
+  "slowgo:bicycle_was": 3,
+  "slowgo:crossing_carveout": 3,
+  "golf_cart": 1,
+  "slowgo:golf_cart_override": 1
+ },
+ "speed_rows_reviewed_with": {},
+ "element_counts": {
+  "stock": {
+   "n": 101981736,
+   "w": 10341433,
+   "r": 190622
+  },
+  "final": {
+   "n": 101981736,
+   "w": 10341433,
+   "r": 190622
+  }
+ },
+ "built_utc": "2026-10-16T18:06:52Z",
+ "street_view_derived_rows": 0,
+ "osm_import_never_rows": 0,
+ "google_rows_removed": {
+  "ways": [
+   11082370,
+   42154743,
+   82485118,
+   82486612,
+   85796493,
+   136353936,
+   842819231,
+   1065386859,
+   1065386860,
+   1065386871,
+   1530464319
+  ],
+  "rule": "SlowGo rule 2026-10-20: no value whose only source is Google Maps or Street View in a build or the open-data repo",
+  "removed_utc": "2026-10-21T01:28:26Z"
+ }
+}

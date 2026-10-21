@@ -1,0 +1,95 @@
+{
+ "file": "fl.speed-overrides.json",
+ "what": "Posted speed limits our extract is missing, for speed_overrides.py (BackRoad Apps LLC, 2026-10-10). An active entry writes maxspeed=\"<n> mph\" into OUR extract only, stamped slowgo:maxspeed_override=<id> and slowgo:maxspeed_source=<type>, never an OSM upload. Read speed_overrides.py and docs/memos/villages-unposted-speeds-2026-10.md before adding one.",
+ "active_rows": 4,
+ "inactive_rows_omitted": 1,
+ "rows": [
+  {
+   "id": "FL-VILLAGES-CR100-NE90TH",
+   "active": true,
+   "way_ids": [
+    11336277
+   ],
+   "maxspeed_mph": 35,
+   "expected_name": "Northeast 90th Street",
+   "expected_length_m": 3222,
+   "source": "Sumter County Public Works sign inventory (public GIS: gisweb.sumtercountyfl.gov/sumtergis/rest/services/Operations/Sign_FieldEdits/FeatureServer, panels joined to supports by POLEID): three ACTIVE R2-1 'SPEED LIMIT 35' panels, poles 0004406 (28.90245,-81.95351, faces N), 0004410 (28.90945,-81.95358, faces N), 0004394 (28.91202,-81.95374, faces SE). The county roads layer's Speed_Limi=45 is a class default, not a posted value, and is not used.",
+   "source_type": "official",
+   "source_date": "2016-06-22",
+   "confidence": "medium (official, but inventoried 2016; nothing newer found)",
+   "ruled_on": "2026-10-10",
+   "why": "Blocks 3 of the 76 measured trips together with Rolling Acres Road south; on its own it unblocks none.",
+   "register_sources": [
+    "sumter_sign_inventory",
+    "sumter_county_roads"
+   ],
+   "quarantined_sources": [],
+   "in_live_map": true
+  },
+  {
+   "id": "FL-VILLAGES-WARNOCK-RD",
+   "active": true,
+   "way_ids": [
+    306068603
+   ],
+   "maxspeed_mph": 30,
+   "expected_name": "Warnock Road",
+   "expected_length_m": 1558,
+   "source": "Sumter County Public Works sign inventory (public GIS: gisweb.sumtercountyfl.gov/sumtergis/rest/services/Operations/Sign_FieldEdits/FeatureServer, panels joined to supports by POLEID): two ACTIVE 'SPEED LIMIT 30' panels (pole 0004723 at 28.8475,-81.9993 faces NW, and one at the south end) and one ACTIVE 'SPEED LIMIT 20' panel. 30 is written; the 20 panel may be a short zone and needs a look before ruling.",
+   "source_type": "official",
+   "source_date": "2016-06-28",
+   "confidence": "medium (official, 2016; one 20 panel unexplained)",
+   "ruled_on": "2026-10-10",
+   "why": "Withholds 1 of the 76 measured trips (Lake Okahumpka Recreation Center to Lake Okahumpka Park); 30 unblocks it.",
+   "register_sources": [
+    "sumter_sign_inventory"
+   ],
+   "quarantined_sources": [],
+   "in_live_map": true
+  },
+  {
+   "id": "FL-VILLAGES-CR500",
+   "active": true,
+   "way_ids": [
+    11336146
+   ],
+   "maxspeed_mph": 40,
+   "expected_name": "County Road 500",
+   "expected_length_m": 1640,
+   "source": "Sumter County Public Works sign inventory (public GIS: gisweb.sumtercountyfl.gov/sumtergis/rest/services/Operations/Sign_FieldEdits/FeatureServer, panels joined to supports by POLEID): two ACTIVE 'SPEED LIMIT 40' panels.",
+   "source_type": "official",
+   "source_date": "2016-05-19",
+   "confidence": "medium (official, 2016)",
+   "ruled_on": "2026-10-10",
+   "why": "Stays amber (40 is over 35). Writing it turns a guessed 36-45 into a posted 40, so the card can say the real number.",
+   "register_sources": [
+    "sumter_sign_inventory"
+   ],
+   "quarantined_sources": [],
+   "in_live_map": true
+  },
+  {
+   "id": "FL-VILLAGES-CENTRAL-PKWY-W",
+   "active": true,
+   "way_ids": [
+    136353937
+   ],
+   "maxspeed_mph": 55,
+   "expected_name": "Central Parkway",
+   "expected_length_m": 1713,
+   "source": "FDOT Maximum_Speed_Limit_TDA, roadway 18580000 (MP 0-0.79 = 45, MP 0.79-4.031 = 55), the copy in scripts/fdot-audit/data/fdot_maxspeed.gpkg fetched 2026-07-16; matching Sumter County sign panels 45 (pole 0005242) and 55 (poles 0005219, 0005226), 2016-05-18. Sumter BOCC 2025-04-22 renamed C-470 east of US 301 to Central Parkway.",
+   "source_type": "official",
+   "source_date": "2026-07-16",
+   "confidence": "high that it is above 35; 45 vs 55 split within the way is the only judgement",
+   "ruled_on": "2026-10-10",
+   "why": "Our map has it unposted (amber). FDOT says 45/55; the rename to Central Parkway likely kept the DOT enrichment from matching it (a pipeline gap to fix too). Writing 55 makes routes along it refused under every setting, which is true.",
+   "register_sources": [
+    "fdot_maxspeed",
+    "sumter_sign_inventory"
+   ],
+   "quarantined_sources": [],
+   "in_live_map": true
+  }
+ ],
+ "not_in_live_map_omitted": 1
+}

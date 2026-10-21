@@ -1,0 +1,52 @@
+{
+ "state": "az",
+ "mode": "diff",
+ "inputs": {
+  "stock": {
+   "file": "arizona-261006.osm.pbf",
+   "bytes": 302950505,
+   "sha256": "8352fda3bee4244e588cebfce711cf500ed2bdc62b9101a75ae6c07a557028f9"
+  },
+  "final": {
+   "file": "az-B-closed.osm.pbf",
+   "bytes": 303445739,
+   "sha256": "f86be5274dd501df226a6e085630d03ca8e2cf5c2f2fc1e1f7008de245cc86c3"
+  }
+ },
+ "objects_changed": 307987,
+ "by_change": {
+  "modified": 307987,
+  "added": 0,
+  "deleted": 0
+ },
+ "geometry_changes": 0,
+ "speed_rows": 29790,
+ "changed_keys": {
+  "bicycle": 278188,
+  "slowgo:path_closed": 278188,
+  "maxspeed": 29790,
+  "maxspeed:source": 29790,
+  "slowgo:adot_routeid": 29790,
+  "slowgo:maxspeed_action": 29790,
+  "slowgo:bicycle_orig": 16104,
+  "slowgo:corroborated": 59,
+  "slowgo:short_link_open": 9,
+  "slowgo:maxspeed_osm_orig": 7
+ },
+ "speed_rows_reviewed_with": {},
+ "element_counts": {
+  "stock": {
+   "n": 45488199,
+   "w": 4672831,
+   "r": 26598
+  },
+  "final": {
+   "n": 45488199,
+   "w": 4672831,
+   "r": 26598
+  }
+ },
+ "built_utc": "2026-10-16T17:25:47Z",
+ "street_view_derived_rows": 0,
+ "osm_import_never_rows": 0
+}
