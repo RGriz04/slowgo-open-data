@@ -3,32 +3,38 @@
  "mode": "stamps",
  "inputs": {
   "stock": {
-   "file": "georgia-260831.osm.pbf (Geofabrik 2026-08-31, stock)",
+   "file": "georgia-260831.osm.pbf (Geofabrik 2026-08-31, stock; not kept)",
    "sha256": "5117cfe6e557cd4d8ad3bb8fc48e81b89ba676e41d29cb4f6d9e343e3bd04c54"
   },
   "final": {
-   "file": "georgia-260831.osm.pbf",
-   "bytes": 355801003,
-   "sha256": "d3cb77d8b94d526e46af46338e0ab9cae6d333bd99b313c05be7e9404f9cf2d2"
+   "file": "ga-S-nofast.osm.pbf",
+   "bytes": 356302247,
+   "sha256": "793c4effce3c9f41a51d34158a0c3edf10fa30f5a5bf07433fee921a3820a719"
   }
  },
- "objects_changed": 200547,
+ "objects_changed": 332653,
  "by_change": {
-  "modified": 200547,
+  "modified": 332653,
   "added": 0,
   "deleted": 0
  },
  "geometry_changes": 0,
  "speed_rows": 0,
  "changed_keys": {
-  "bicycle": 200533,
+  "bicycle": 306849,
   "slowgo:path_closed": 200533,
+  "slowgo:nofast": 106316,
+  "slowgo:speed_estimate": 72701,
+  "slowgo:speed_estimate_basis": 72701,
+  "slowgo:speed_estimate_confidence": 72701,
+  "slowgo:speed_estimate_verdict": 72701,
   "slowgo:bicycle_orig": 9443,
+  "slowgo:nofast_bicycle_orig": 5428,
   "slowgo:short_link_open": 14
  },
  "speed_rows_reviewed_with": {},
- "element_counts": null,
- "built_utc": "2026-10-16T17:04:35Z",
  "street_view_derived_rows": 0,
- "osm_import_never_rows": 0
+ "osm_import_never_rows": 0,
+ "element_counts": null,
+ "built_utc": "2026-10-29T19:24:50Z"
 }

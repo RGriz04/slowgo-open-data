@@ -8,28 +8,34 @@
    "sha256": "83d52238d02459511a414b5b937df2add92ff987e677fd61a412b1288cd0c8db"
   },
   "final": {
-   "file": "new-york-enriched-v3.osm.pbf",
-   "bytes": 496335297,
-   "sha256": "5a4c071eb14d2df0e3b5364992aa324eef0c0716c295cac9cecbcaa47830ab4a"
+   "file": "ny-S-nofast.osm.pbf",
+   "bytes": 496831452,
+   "sha256": "a5177375c405f142799e92dba75b616c3e51ebd6142bfc7687fa51adff667d14"
   }
  },
- "objects_changed": 668636,
+ "objects_changed": 748866,
  "by_change": {
-  "modified": 668636,
+  "modified": 748866,
   "added": 0,
   "deleted": 0
  },
  "geometry_changes": 0,
  "speed_rows": 51574,
  "changed_keys": {
-  "bicycle": 617056,
+  "bicycle": 697452,
   "slowgo:path_closed": 617056,
+  "slowgo:nofast": 80396,
   "maxspeed": 51574,
   "maxspeed:source": 51574,
   "slowgo:maxspeed_action": 51574,
   "slowgo:nysdot_routeid": 50750,
+  "slowgo:speed_estimate": 49399,
+  "slowgo:speed_estimate_basis": 49399,
+  "slowgo:speed_estimate_confidence": 49399,
+  "slowgo:speed_estimate_verdict": 49399,
   "slowgo:bicycle_orig": 16009,
   "slowgo:reviewed": 8204,
+  "slowgo:nofast_bicycle_orig": 4663,
   "slowgo:maxspeed_osm_orig": 1312,
   "slowgo:maxspeed_station": 824,
   "slowgo:maxspeed_sentinel": 242,
@@ -40,6 +46,8 @@
  "speed_rows_reviewed_with": {
   "nysdot": 8204
  },
+ "street_view_derived_rows": 0,
+ "osm_import_never_rows": 0,
  "element_counts": {
   "stock": {
    "n": 56613625,
@@ -52,17 +60,15 @@
    "r": 77005
   }
  },
- "built_utc": "2026-10-16T17:41:40Z",
- "street_view_derived_rows": 0,
- "osm_import_never_rows": 0,
+ "built_utc": "2026-10-29T19:48:07Z",
  "relabelled": [
   {
    "key": "slowgo:reviewed",
    "from": "street-view",
    "to": "nysdot",
-   "rows": 8204,
-   "why": "Wrong label: these are New York State DOT Roadway Inventory values; no imagery was used (SlowGo ruling 2026-10-20). Values unchanged; our next map build carries the same label.",
-   "relabelled_utc": "2026-10-21T21:59:15Z"
+   "rows": 0,
+   "why": "",
+   "relabelled_utc": "2026-10-29T19:59:48Z"
   }
  ]
 }

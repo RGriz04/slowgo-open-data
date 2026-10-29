@@ -8,32 +8,42 @@
    "sha256": "8352fda3bee4244e588cebfce711cf500ed2bdc62b9101a75ae6c07a557028f9"
   },
   "final": {
-   "file": "az-B-closed.osm.pbf",
-   "bytes": 303445739,
-   "sha256": "f86be5274dd501df226a6e085630d03ca8e2cf5c2f2fc1e1f7008de245cc86c3"
+   "file": "az-S-nofast.osm.pbf",
+   "bytes": 303770716,
+   "sha256": "aa9aed14cda13b92ac5b18731566dfc3a1c90a3a989b6733ad10edffe93ecaf7"
   }
  },
- "objects_changed": 307987,
+ "objects_changed": 375335,
  "by_change": {
-  "modified": 307987,
+  "modified": 375335,
   "added": 0,
   "deleted": 0
  },
  "geometry_changes": 0,
- "speed_rows": 29790,
+ "speed_rows": 29798,
  "changed_keys": {
-  "bicycle": 278188,
+  "bicycle": 348965,
   "slowgo:path_closed": 278188,
-  "maxspeed": 29790,
+  "slowgo:nofast": 70777,
+  "maxspeed": 29798,
   "maxspeed:source": 29790,
   "slowgo:adot_routeid": 29790,
   "slowgo:maxspeed_action": 29790,
+  "slowgo:speed_estimate": 27017,
+  "slowgo:speed_estimate_basis": 27017,
+  "slowgo:speed_estimate_confidence": 27017,
+  "slowgo:speed_estimate_verdict": 27017,
   "slowgo:bicycle_orig": 16104,
+  "slowgo:nofast_bicycle_orig": 7995,
   "slowgo:corroborated": 59,
   "slowgo:short_link_open": 9,
+  "slowgo:maxspeed_override": 8,
+  "slowgo:maxspeed_source": 8,
   "slowgo:maxspeed_osm_orig": 7
  },
  "speed_rows_reviewed_with": {},
+ "street_view_derived_rows": 0,
+ "osm_import_never_rows": 0,
  "element_counts": {
   "stock": {
    "n": 45488199,
@@ -46,7 +56,5 @@
    "r": 26598
   }
  },
- "built_utc": "2026-10-16T17:25:47Z",
- "street_view_derived_rows": 0,
- "osm_import_never_rows": 0
+ "built_utc": "2026-10-29T19:59:34Z"
 }

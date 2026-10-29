@@ -267,6 +267,29 @@ def alterations_by_diff(stock, final, tmpdir):
 
 # ── alterations: stamps mode ────────────────────────────────────────────────────────────────────────────────────
 KNOWN_STAMPS = {"slowgo:path_closed", "slowgo:bicycle_orig", "slowgo:short_link_open"}
+# The no-faster-roads step (nofast_access.py, rebuild 4, live 2026-10-29) stamps every way it closes or labels and
+# keeps the bicycle value it replaced; nofast_access.reverted_tags undoes it exactly (its tests prove every edit
+# reverses). Georgia's stock extract (georgia-260831, sha 5117cfe6) is no longer on disk or at Geofabrik, so the
+# rebuild-4 Georgia rows are read back through both stages' own stamps.
+NOFAST_STAMPS = {"slowgo:nofast", "slowgo:nofast_bicycle_orig", "slowgo:speed_estimate", "slowgo:speed_estimate_basis",
+                 "slowgo:speed_estimate_confidence", "slowgo:speed_estimate_verdict",
+                 "slowgo:maxspeed_estimate_sentinel", "slowgo:maxspeed_estimate_orig"}
+
+
+def stock_tags_from_stamps(tags):
+    """The stock tags of one stamped way: undo the no-faster-roads step, then the path closure."""
+    base = tags
+    if any(k in NOFAST_STAMPS for k in tags):
+        from nofast_access import reverted_tags
+        base = reverted_tags(tags)
+    stamps = {k for k in base if k.startswith("slowgo:")}
+    before = {k: v for k, v in base.items() if k not in stamps}
+    if "slowgo:path_closed" in base:
+        if "slowgo:bicycle_orig" in base:
+            before["bicycle"] = base["slowgo:bicycle_orig"]
+        else:
+            before.pop("bicycle", None)
+    return before
 
 
 def alterations_by_stamps(final):
@@ -279,14 +302,8 @@ def alterations_by_stamps(final):
             stamps = {k for k in tags if k.startswith("slowgo:")}
             if not stamps:
                 return
-            unknown.update(stamps - KNOWN_STAMPS)
-            before = {k: v for k, v in tags.items() if k not in stamps}
-            if "slowgo:path_closed" in tags:
-                if "slowgo:bicycle_orig" in tags:
-                    before["bicycle"] = tags["slowgo:bicycle_orig"]
-                else:
-                    before.pop("bicycle", None)
-            rows.append(("w", w.id, before, tags, False))
+            unknown.update(stamps - KNOWN_STAMPS - NOFAST_STAMPS)
+            rows.append(("w", w.id, stock_tags_from_stamps(tags), tags, False))
 
     S().apply_file(final)
     if unknown:
@@ -312,6 +329,55 @@ def street_view_ids():
 
 class GoogleRefused(SystemExit):
     pass
+
+
+# Refusal-list ways whose speed is now FDOT's own number (BackRoad Apps LLC 2026-10-29, open-data release): they
+# stay on the frozen list (so no build can bring back their Street View review), and the package may list them only
+# when the row says FDOT wrote it (check_fdot_replaced). Read from street-view-derived.json `_fdot_replaced_in_package`.
+FDOT_REPLACED_ACTIONS = {"held_over45_written"}
+
+
+def fdot_replaced_ids():
+    try:
+        import street_view
+        return {int(w) for w in (street_view.load().get("_fdot_replaced_in_package") or {}).get("ways", [])}
+    except ImportError:
+        return set()
+
+
+def package_refusal_ids():
+    """The frozen list minus the FDOT-replaced ways, or None without street_view.py (as street_view_ids)."""
+    ids = street_view_ids()
+    return None if ids is None else ids - fdot_replaced_ids()
+
+
+def not_fdot_rows(head, body):
+    """FDOT-replaced way ids whose speed row is NOT an FDOT held row (so drop-google treats them as Google rows)."""
+    rep = fdot_replaced_ids()
+    ix = {c: head.index(c) for c in ("osm_way_id", "maxspeed_source", "slowgo_action") if c in head}
+    get = lambda row, c: row[ix[c]] if c in ix else None
+    return {int(get(r, "osm_way_id")) for r in body if int(get(r, "osm_way_id")) in rep
+            and (get(r, "maxspeed_source") != "FDOT" or get(r, "slowgo_action") not in FDOT_REPLACED_ACTIONS)}
+
+
+def check_fdot_replaced(out):
+    """Every FDOT-replaced way in the package must be an FDOT row with no Street View trace in its alterations."""
+    rep, bad = fdot_replaced_ids(), []
+    for st in sorted(os.listdir(os.path.join(out, "data"))):
+        d = os.path.join(out, "data", st)
+        sp, ap_ = os.path.join(d, "speed.csv.gz"), os.path.join(d, "alterations.csv.gz")
+        if os.path.exists(sp):
+            with gzip.open(sp, "rt", newline="") as f:
+                for r in csv.DictReader(f):
+                    if int(r["osm_way_id"]) in rep and (r.get("maxspeed_source") != "FDOT" or r.get("slowgo_action") not in FDOT_REPLACED_ACTIONS):
+                        bad.append(f"{st} way {r['osm_way_id']}: source {r.get('maxspeed_source')!r}, action {r.get('slowgo_action')!r}")
+        if os.path.exists(ap_):
+            with gzip.open(ap_, "rt", newline="") as f:
+                for r in csv.DictReader(f):
+                    if r["osm_type"] == "w" and int(r["osm_id"]) in rep and (GOOGLE_TEXT.search(r["after"]) or r["after"] == "reviewed_confirm"):
+                        bad.append(f"{st} way {r['osm_id']}: {r['key']}={r['after']}")
+    if bad:
+        raise GoogleRefused(f"FDOT-replaced way(s) not FDOT rows: {bad[:5]}")
 
 
 REVIEW_KEYS = ("maxspeed", "maxspeed:source", "slowgo:maxspeed_action", "slowgo:fdot_roadway", "slowgo:reviewed",
@@ -723,9 +789,10 @@ def cmd_apply(a):
 def cmd_mark(a):
     """Re-apply street_view_derived / osm_import to every data/<state>/speed.csv.gz of a built package (no extracts
     needed): the marks change when the frozen list does, the alterations don't."""
-    ids = street_view_ids()
+    ids = package_refusal_ids()
     if ids is None:
         raise SystemExit("mark needs street_view.py and overrides/street-view-derived.json beside this script")
+    check_fdot_replaced(a.out)
     present = google_rows_in(a.out, ids)
     if present:
         raise GoogleRefused(f"{sum(present.values())} Google-only row(s) in this package ({present}): run drop-google first "
@@ -782,8 +849,8 @@ def cmd_drop_google(a):
     their speed.csv.gz row goes, and in alterations.csv.gz every row of that way whose key the review wrote
     (REVIEW_KEYS) goes; any other alteration of the same way (a path closure, say) stays. summary.json is recounted.
     Idempotent. Returns what it removed."""
-    ids = street_view_ids()
-    if ids is None:
+    base_ids = package_refusal_ids()
+    if base_ids is None:
         raise SystemExit("drop-google needs street_view.py and overrides/street-view-derived.json beside this script")
     removed = {}
     for st in sorted(os.listdir(os.path.join(a.out, "data"))):
@@ -794,6 +861,7 @@ def cmd_drop_google(a):
         with gzip.open(sp, "rt", newline="") as f:
             r = csv.reader(f); head = next(r); body = list(r)
         wi = head.index("osm_way_id")
+        ids = base_ids | not_fdot_rows(head, body)      # an FDOT-replaced way goes too unless its row is FDOT's
         keep = [row for row in body if int(row[wi]) not in ids]
         gone_speed = sorted(int(row[wi]) for row in body if int(row[wi]) in ids)
         gone_alt, keys_gone, still = 0, {}, set()
@@ -840,7 +908,7 @@ def cmd_drop_google(a):
             writej(s, sj, indent=1)
         if gone_speed:
             removed[st] = {"speed_rows": len(gone_speed), "alteration_rows": gone_alt}
-    left = google_rows_in(a.out, ids)
+    left = google_rows_in(a.out, base_ids)
     print(json.dumps({"removed": removed, "google_rows_left": left}))
     if left:
         raise GoogleRefused(f"Google-only rows still in the package: {left}")
@@ -904,6 +972,11 @@ def refuse_google_package(out):
 def cmd_manifest(a):
     refuse_scdot_package(a.out)                 # SCDOT hard gate: the last look before the package is sealed
     refuse_google_package(a.out)
+    if os.path.isdir(os.path.join(a.out, "data")):
+        check_fdot_replaced(a.out)
+        ids = package_refusal_ids()
+        if ids and google_rows_in(a.out, ids):
+            raise GoogleRefused("a refusal-list row is in the package (BackRoad Apps LLC 2026-10-20)")
     rows = []
     for root, _, files in os.walk(a.out):
         for fn in sorted(files):

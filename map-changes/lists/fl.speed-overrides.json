@@ -1,7 +1,7 @@
 {
  "file": "fl.speed-overrides.json",
  "what": "Posted speed limits our extract is missing, for speed_overrides.py (BackRoad Apps LLC, 2026-10-10). An active entry writes maxspeed=\"<n> mph\" into OUR extract only, stamped slowgo:maxspeed_override=<id> and slowgo:maxspeed_source=<type>, never an OSM upload. Read speed_overrides.py and docs/memos/villages-unposted-speeds-2026-10.md before adding one.",
- "active_rows": 4,
+ "active_rows": 5,
  "inactive_rows_omitted": 1,
  "rows": [
   {
@@ -89,7 +89,27 @@
    ],
    "quarantined_sources": [],
    "in_live_map": true
+  },
+  {
+   "id": "FL-BROWNWOOD-CR44A-ROUNDABOUT",
+   "active": true,
+   "way_ids": [
+    188661180
+   ],
+   "maxspeed_mph": 35,
+   "expected_name": "CR 44A",
+   "expected_length_m": 48,
+   "source": "FDOT Maximum Speed Limit (TDA) layer, the copy we already hold (data/fl_fdot_maxspeed.gpkg): ROADWAY 18570000 (CR 44A), mileposts 3.917-4.92, SPEED 35, Sumter County, covering this roundabout. The same record is already written to the neighbouring roundabout piece (way 1498361487: maxspeed 35 mph, maxspeed:source FDOT, slowgo:fdot_roadway 18570000). This piece was missed by conflation, probably because it is so short. Buena Vista Boulevard on both sides is posted 35.",
+   "source_type": "official",
+   "source_date": "2026-08-30",
+   "confidence": "high (FDOT record covers the spot; the sibling piece of the same roundabout already carries it)",
+   "ruled_on": "2026-10-13",
+   "why": "The single trigger of the default-setting NoGo for Spanish Springs Town Square -> Brownwood Paddock Square (2026-10-12): a 26 ft unposted CR 44A piece is painted amber mid-route, so the 1.3 final-approach rule can't trim Kiessel Road. With this row the trip is served, ending about 300 ft short at Kiessel Road.",
+   "register_sources": [
+    "fdot_maxspeed"
+   ],
+   "quarantined_sources": [],
+   "in_live_map": true
   }
- ],
- "not_in_live_map_omitted": 1
+ ]
 }

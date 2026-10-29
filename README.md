@@ -13,7 +13,7 @@ Planned home: https://github.com/RGriz04/slowgo-open-data
 
 | Folder | What it is | Size |
 |---|---|---|
-| `map-changes/` | Every change we made to OpenStreetMap data before building the routing map that is live today (Florida, Georgia, New York, Arizona; in use since 2026-10-11): speed limits from state transportation departments, path closures for our cart router, a few hand-checked corrections. One row per changed tag, with the value before and after, plus the rule files behind them and the script that applies them to a stock OpenStreetMap extract. Start with `map-changes/README.md`. | about 13 MB |
+| `map-changes/` | Every change we made to OpenStreetMap data before building the routing map that is live today (Florida, Georgia, New York, Arizona; in use since 2026-10-29, the map SlowGo 1.5 uses): speed limits from state transportation departments, path closures for our cart router, a few hand-checked corrections. One row per changed tag, with the value before and after, plus the rule files behind them and the script that applies them to a stock OpenStreetMap extract. Start with `map-changes/README.md`. | about 13 MB |
 | `places/` | The places database behind SlowGo's place search and place cards: OpenStreetMap places merged with Overture Maps places (402,701 places in Florida, Georgia, New York and Arizona, Overture release 2026-09-23.1, our build of 2026-10-15, the one our places server uses). One JSON object per line. See `places/README.md`. | about 34 MB |
 | `tools/` | `export_places.py`, the script that wrote `places/` from our places build. | small |
 | `licences/` | The licences of the Overture sources merged into `places/` (CDLA Permissive 2.0, Apache 2.0 and Foursquare's NOTICE, CC0 1.0) and Overture's attribution page for this release. | small |
@@ -47,9 +47,9 @@ observations are credited to BackRoad Apps LLC (SlowGo).
   art. I §24, chapter 119 Florida Statutes), so we use them with credit; the county layers themselves are not here,
   only the rule (the way and the value) that our map uses.
 - **Nothing from Google, from South Carolina's state transportation department, or from a source we can't clearly republish.** Every source
-  here is one whose terms let us republish it under the ODbL. Eleven Florida speed rows that rested only on Google
-  Street View are still in our live map until our next map rebuild (planned with SlowGo 1.5) and are not offered
-  here (`map-changes/README.md`, "Rows left out"). In `places/`, website and address values that were Google Maps or
+  here is one whose terms let us republish it under the ODbL. The Florida speed values that rested only on Google Street View are
+  gone from the live map; 8 of those roads now carry the Florida DOT's own value and are listed as FDOT rows
+  (`map-changes/README.md`, "Rows left out"). In `places/`, website and address values that were Google Maps or
   Google Search links are removed (the places stay; `places/README.md`).
 - **No edits to OpenStreetMap itself.** Everything here lives only in our copy. We don't submit automated changes to
   OpenStreetMap.
